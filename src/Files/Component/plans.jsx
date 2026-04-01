@@ -16,22 +16,23 @@ const Plans = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 200,   // ✅ REQUIRED
-          uid: "user1",  // ✅ REQUIRED
+          amount: 200,
+          uid: "user1",
         }),
       }
     );
 
     const data = await res.json();
-    console.log("API Response:", data);
+    console.log("Response:", data);
 
     if (data.status) {
       window.location.href = data.paymentUrl;
     } else {
-      alert(data.message);
+      console.error(data.gateway_response);
+      alert("Payment failed");
     }
   } catch (err) {
-    console.error("Fetch error:", err);
+    console.error(err);
   }
 };
 
