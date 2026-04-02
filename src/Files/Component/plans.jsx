@@ -6,29 +6,31 @@ const Plans = () => {
   const [open, setOpen] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("");
 
- 
   const payNow = async () => {
-  const res = await fetch(
-    "https://darkslategray-leopard-197774.hostingersite.com/galepay/create-payment.php",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const res = await fetch(
+      "https://darkslategray-leopard-197774.hostingersite.com/pay/create-order.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: 100,
+          uid: "user123",
+        }),
       },
-      body: JSON.stringify({ amount: 100 }),
+    );
+
+    const data = await res.json();
+
+    console.log(data);
+
+    if (data.status && data.payment_url) {
+      window.location.href = data.payment_url;
+    } else {
+      alert("Payment failed");
     }
-  );
-
-  const data = await res.json();
-
-  console.log(data);
-
-  if (data.status && data.payment_url) {
-    window.location.href = data.payment_url;
-  } else {
-    alert("Payment failed");
-  }
-};
+  };
 
   const onClickPay = (amt) => {
     payNow();
