@@ -6,37 +6,32 @@ const Plans = () => {
   const [open, setOpen] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("");
 
-  const createPayment = async () => {
-  try {
-    const res = await fetch(
-      "https://darkslategray-leopard-197774.hostingersite.com/pay/create-order.php",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount: 200,   // ✅ REQUIRED
-          uid: "user1",  // ✅ REQUIRED
-        }),
-      }
-    );
-
-    const data = await res.json();
-    console.log("API Response:", data);
-
-    if (data.status) {
-      window.location.href = data.paymentUrl;
-    } else {
-      alert(data.message);
+ 
+  const payNow = async () => {
+  const res = await fetch(
+    "https://darkslategray-leopard-197774.hostingersite.com/galepay/create-payment.php",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ amount: 100 }),
     }
-  } catch (err) {
-    console.error("Fetch error:", err);
+  );
+
+  const data = await res.json();
+
+  console.log(data);
+
+  if (data.status && data.payment_url) {
+    window.location.href = data.payment_url;
+  } else {
+    alert("Payment failed");
   }
 };
 
   const onClickPay = (amt) => {
-    createPayment();
+    payNow();
     // setSelectedPayment(
     //   `phonepe://pay?pa=4405232014865358.cc@idfcbank&pn=Montaro&am=${amt}&cu=INR&tn=Bill`,
     // );
