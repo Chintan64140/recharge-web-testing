@@ -17,6 +17,7 @@ const Plans = () => {
         body: JSON.stringify({
           amount: 100,
           uid: "user123",
+          email: "ranjji1324@gmail.com",
         }),
       },
     );
@@ -32,7 +33,7 @@ const Plans = () => {
       console.log(data);
     }
   };
-  
+
   const onClickPay = (amt) => {
     payNow();
     // setSelectedPayment(
