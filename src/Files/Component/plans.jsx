@@ -15,9 +15,9 @@ const Plans = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: 100,
-          uid: "user123",
-          email: "ranjji1324@gmail.com",
+          amount: 200,
+          email: "user@gmail.com",
+          phone: "9102380668",
         }),
       },
     );
