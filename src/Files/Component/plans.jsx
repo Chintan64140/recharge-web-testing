@@ -161,7 +161,7 @@ const Plans = () => {
                 return (
                   <div
                     onClick={() => {
-                      onClickPay(item?.price?.toFixed(2));
+                      // onClickPay(item?.price?.toFixed(2));
                     }}
                     className={`border-b border-[#d3d3d3] rounded bg-white p-5 px-4`}
                     key={index}
